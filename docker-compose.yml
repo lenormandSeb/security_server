@@ -2,4 +2,27 @@ version: "3.3"
 
 services:
   nodejs:
-    build: docker/nodejs
+    build: 
+      context: docker/nodejs
+      args: 
+        port : 1337
+    volumes: 
+      - data-project:/srv/nodeProject/current/
+    ports: 
+      - 49160:1337
+    environment: 
+      PORT : 1337
+  nodejs2:
+    build: 
+      context: docker/nodejs
+      args: 
+        port : 3000
+    volumes: 
+      - data-project:/srv/nodeProject2/current/
+    ports: 
+      - 49161:3000
+    environment: 
+      PORT : 3000
+
+volumes: 
+  data-project:
