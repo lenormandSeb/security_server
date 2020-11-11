@@ -1,6 +1,19 @@
 version: "3.3"
 
 services:
+  mysql:
+    container_name: mysql-dev
+    build: docker/mysql
+    volumes: 
+      - data-project:/var/lib/mysql
+    ports:
+      - "3366:3306"
+    environment:
+      # some variable to replace
+      MYSQL_DATABASE: "security_bdd"
+      MYSQL_USER: "bill"
+      MYSQL_PASSWORD: "12345678"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
   nginxplus:
     container_name: nginxplus
     build:
@@ -15,8 +28,15 @@ services:
       - data-project:/srv/nodeProject/current/
     ports: 
       - 49160:1337
+    depends_on: 
+      - mysql
     environment: 
       PORT : 1337
+      database_host : "mysql"
+      database : "security_bdd"
+      user_database: "bill"
+      pass_db: "12345678"
+    restart: on-failure
   nodejs2:
     container_name: node2
     build: 
@@ -27,8 +47,15 @@ services:
       - data-project:/srv/nodeProject2/current/
     ports: 
       - 49161:3000
+    depends_on: 
+      - mysql
     environment: 
       PORT : 3000
+      database_host : "mysql"
+      database : "security_bdd"
+      user_database: "bill"
+      pass_db: "12345678"
+    restart: on-failure
   nginx:
     container_name: nginx-loadbalancing
     build: 
@@ -38,19 +65,6 @@ services:
     depends_on: 
       - nodejs
       - nodejs2
-  mysql:
-    container_name: mysql-dev
-    build: docker/mysql
-    volumes: 
-      - data-project:/var/lib/mysql
-    ports:
-      - "3366:3306"
-    environment:
-      # some variable to replace
-      MYSQL_DATABASE: "security_bdd"
-      MYSQL_USER: "bill"
-      MYSQL_PASSWORD: "12345678"
-      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
 
 volumes: 
   data-project:

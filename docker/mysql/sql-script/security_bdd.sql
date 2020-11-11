@@ -27,39 +27,20 @@ USE security_bdd;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `test`
+-- Structure de la table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `test` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id_users` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(250) NOT NULL,
   `prenom` varchar(600) NOT NULL,
   `dateNaissance` date NOT NULL,
   `adresseMail` varchar(250) NOT NULL,
   `tel` int(11) NOT NULL,
-  `adressePostale` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPRESSED;
+  `adressePostale` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_users`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `test`
---
-ALTER TABLE `test`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `test`
---
-ALTER TABLE `test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

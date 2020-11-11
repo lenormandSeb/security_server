@@ -23,7 +23,7 @@ RUN set -x \
 # Use versioned packages over defaults to specify a release
     && nginxPackages=" \
         nginx-plus \
-        nginx-plus=${NGINX_VERSION}-${PKG_RELEASE} \
+        # nginx-plus=${NGINX_VERSION}-${PKG_RELEASE} \
         # nginx-plus-module-xslt \
         # nginx-plus-module-xslt=${NGINX_VERSION}-${PKG_RELEASE} \
         # nginx-plus-module-geoip \
