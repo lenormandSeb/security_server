@@ -2,9 +2,11 @@ version: "3.3"
 
 services:
   nginxplus:
+    container_name: nginxplus
     build:
       context: docker/nginxplus
   nodejs:
+    container_name: node1
     build: 
       context: docker/nodejs
       args: 
@@ -16,6 +18,7 @@ services:
     environment: 
       PORT : 1337
   nodejs2:
+    container_name: node2
     build: 
       context: docker/nodejs
       args: 
@@ -27,6 +30,7 @@ services:
     environment: 
       PORT : 3000
   nginx:
+    container_name: nginx-loadbalancing
     build: 
       context: docker/nginx
     ports:
@@ -35,6 +39,7 @@ services:
       - nodejs
       - nodejs2
   mysql:
+    container_name: mysql-dev
     build: docker/mysql
     volumes: 
       - data-project:/var/lib/mysql
