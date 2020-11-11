@@ -21,8 +21,9 @@ SET time_zone = "+00:00";
 -- Base de données : `test`
 --
 
-CREATE DATABASE IF NOT EXISTS security_bdd
+CREATE DATABASE IF NOT EXISTS security_bdd;
 
+USE security_bdd;
 -- --------------------------------------------------------
 
 --
