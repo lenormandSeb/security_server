@@ -7,10 +7,10 @@ var sanitizeHtml = require('sanitize-html');
 const app = express();
 
 // var conn = mysql.createConnection({
-//   database: 'test',
+//   database: 'security_bdd',
 //   host: "localhost",
-//   user: "root",
-//   password: ""
+//   user: "bill",
+//   password: "12345678"
 // });
 // conn.connect(function(err) {
 //     if (err) throw err;
@@ -49,9 +49,14 @@ app.get("/", (req, res)=>{
     var cleanDate = sanitizeHtml(date,{});
 
     console.log("p1=" + cleanEmail);
-    var sql3 = "Insert into test VALUES ('" + cleanNom + "', '" + cleanPrenom + "', '" + cleanDate + "', '" + cleanEmail + "','" + cleanTel + "','" + cleanAdressePostale + "') ";
+    var sql3 = "Insert into users (nom,prenom,dateNaissance,adresseMail,tel,adressePostale) VALUES (AES_ENCRYPT('" + cleanNom + "','cleTpAes'), AES_ENCRYPT('" + cleanPrenom + "','cleTpAes'),'" + cleanDate + "', AES_ENCRYPT('" + cleanEmail + "','cleTpAes'), '" + cleanTel + "',AES_ENCRYPT('" + cleanAdressePostale + "','cleTpAes')) ";
     // res.send("<h1>Hello</h1>");  
     res.sendFile(__dirname  + '/index.html');
+    // conn.query(sql3, function(err, results) {
+    //     if (err) throw err;
+    //     console.log("Insert a record!");
+    //     });
+    //     res.sendFile(__dirname  + '\\index.html');
 })
 .patch("/", (req,res)=>{})
 .put("/", (req,res)=>{})
